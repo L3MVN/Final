@@ -1,19 +1,24 @@
 {% extends "guitars/base.html" %}
 {% load django_bootstrap5 %}
 
-{% block title %}| Choose a department. Be sure to find the correct location. |{% endblock %}
+{% block title %}| Choose a department. |{% endblock %}
 
 {% block content %}
 
 
+{% if perms.guitars.add_guitar %} 
+    <p><a href="{% url 'guitars:create' %}" class="btn btn-primary">Add</a></p>
+{% endif %}
+
+<p>
 {% if object_list %}
     {% for department in object_list %}
 <p></p>
     <div class="float-start col-sm-2">
         <div class="card m-1" style="height: 10em">
             <div class="card-body">
-                <h4 class="card-title">{{department.name}}</h4>
-                <h5 class="card-subtitle mb-2 text-muted">{{department.location}}</h5>
+                <h4 class="card-title"><a href="{% url 'guitars:detail' department.id %}">{{department.name}}<a/></h4>
+                
             </div>
         </div>
     </div>            
@@ -23,5 +28,5 @@
 {% else %}
     <p>Please tune [E-A-D-G-B-E] in soon for more captivating information.</p>
 {% endif %}
-
+</p>
 {% endblock %}

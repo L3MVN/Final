@@ -1,0 +1,16 @@
+{% extends "guitars/base.html" %}
+{% load django_bootstrap5 %}
+
+{% block title %} {{department.name}} {% endblock %}
+
+
+{% block content %}
+
+<form method="post">
+{% csrf_token %}
+{% bootstrap_form form layout=layout size=size %}
+{% bootstrap_button button_type="submit" content="Strum It" %}
+<a class="btn btn-secondary" href="javascript:history.back()">Return</a>
+</form>
+
+{% endblock %}

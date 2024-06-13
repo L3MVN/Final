@@ -1,0 +1,20 @@
+{% extends "guitars/base.html" %}
+{% load django_bootstrap5 %}
+
+{% block title %} Delete {{department.name}} ? {% endblock %}
+
+{% block content %}
+
+<p> Are you sure you want to restring this ole gitfiddle? Choose wisely, You must.</p>
+
+
+<form method="post">
+{% csrf_token %}
+{% bootstrap_form form layout=layout size=size %}
+{% bootstrap_button button_type="submit" content="Strum It" %}
+<a class="btn btn-secondary" href="{% url 'guitars:detail' department.id %}">Cancel</a>
+</form>
+
+
+
+{% endblock %}

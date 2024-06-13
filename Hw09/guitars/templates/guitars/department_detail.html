@@ -1,0 +1,30 @@
+{% extends "guitars/base.html" %}
+{% load django_bootstrap5 %}
+
+{% block title %}{{department.name}}{% endblock %}
+
+{% block content %}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'guitars:home' %}">Departments</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ department.name }}</li>
+    </ol>
+</nav>
+
+<p>
+{% if perms.guitars.change_guitar %}  
+    <a href="{% url 'guitars:update' department.id %}" class="btn btn-primary">Update</a>
+{% endif %}
+{% if perms.guitars.delete_guitars %}
+    <a href="{% url 'guitars:delete' department.id %}" class="btn btn-danger">Delete</a>
+{% endif %}
+</p>
+
+<p><b> The closest service department location is  
+    <strong> [ {{department.location}} ]</strong></b></p>
+
+
+
+
+{% endblock %}
